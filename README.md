@@ -2,41 +2,15 @@
 **Team 10:**
 **Members:** Fouzan Ahmed Mir & Hinal Pujara
 
-## Problem Statement  
-FitNut aims to address the challenge of combining fitness routines with nutritional planning. By offering an integrated solution, we empower users to achieve their wellness goals efficiently.  
+## Overview
+FitNut is a wellness-focused mobile application designed to help users maintain a balanced lifestyle by providing tools for fitness tracking, nutrition logging, and mindfulness exercises. Built using Kotlin and adhering to modern Android development practices such as Jetpack Compose, Material Design, and integration with Google APIs, the app delivers a seamless and engaging user experience. FitNut supports offline data storage with Room, tracks fitness metrics using the Google Fit API, and includes personalized profiles for enhanced usability.
 
-## Target Audience  
-- Fitness enthusiasts  
-- Beginners in fitness and nutrition  
-- Health-conscious individuals seeking motivation  
-
-## Key Features  
-1. **Nutrition Guidance**: Access meal suggestions and track caloric intake.  
-2. **Fitness Tracking**: Monitor steps, workouts, and calories burned via Google Fit API.  
-3. **Gamification**: Earn points and badges for completing fitness or nutrition milestones.  
-4. **Daily Progress Reports**: Get insights on achievements and goals.  
-
-## Competitive Analysis  
-FitNut stands out from competitors like MyFitnessPal and 8fit by emphasizing a gamified approach and offering a seamless experience for both fitness and nutrition.  
-
-| **Competitor**       | **Features**                          | **Comparison**                     |  
-|-----------------------|---------------------------------------|-------------------------------------|  
-| MyFitnessPal          | Calorie tracking, meal logging       | Lacks gamification; more complex   |  
-| 8fit                  | Fitness routines, nutrition guides   | Limited tracking capabilities      |  
-| Fitbit App            | Fitness tracking, device integration | Requires wearable device           |  
-
-## Technologies  
-- **Room Database**: Store user progress locally.  
-- **Firebase**: User authentication and cloud data backup.  
-- **APIs**:  
-  - **Nutritionix API**: Provide accurate nutritional data for meals.  
-  - **Google Fit API**: Fetch fitness metrics like steps and calories burned.  
-- **UI Design**: Jetpack Compose and Material Design for an intuitive interface.  
-
+## Objective
+The primary objective of the FitNut app is to create a personalized wellness assistant that combines fitness tracking, dietary awareness, and mindfulness practices into a single, easy-to-use platform. By integrating key features such as fitness monitoring, nutritional insights, and goal tracking, the app empowers users to make informed lifestyle choices and stay committed to their wellness journey.
 ## Team Contributions  
 This repository will showcase iterative development and collaborative efforts by all team members.  
 
 ## Links  
-- **Idea Proposal**: Coming soon! 
+- **Idea Proposal**: [Idea Proposal Document](#https://docs.google.com/document/d/1m28GIr9DtxMs9TV3PsY5s-ygB_GqTzkq4Ovbv4sajXg/edit?usp=sharing) 
 - **Design Document**: Coming soon!  
 - **Prototype APK**: Coming soon!  
