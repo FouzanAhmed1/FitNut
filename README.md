@@ -11,6 +11,6 @@ The primary objective of the FitNut app is to create a personalized wellness ass
 This repository will showcase iterative development and collaborative efforts by all team members.  
 
 ## Links  
-- **Idea Proposal**: [Idea Proposal Document](#https://docs.google.com/document/d/1m28GIr9DtxMs9TV3PsY5s-ygB_GqTzkq4Ovbv4sajXg/edit?usp=sharing) 
+- **Idea Proposal**: [Idea Proposal Document](https://docs.google.com/document/d/1m28GIr9DtxMs9TV3PsY5s-ygB_GqTzkq4Ovbv4sajXg/edit?usp=sharing)
 - **Design Document**: Coming soon!  
 - **Prototype APK**: Coming soon!  
