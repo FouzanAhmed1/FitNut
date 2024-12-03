@@ -12,5 +12,5 @@ This repository will showcase iterative development and collaborative efforts by
 
 ## Links  
 - **Idea Proposal**: [Idea Proposal Document](https://docs.google.com/document/d/1m28GIr9DtxMs9TV3PsY5s-ygB_GqTzkq4Ovbv4sajXg/edit?usp=sharing)
-- **Design Document**: Coming soon!  
+- **Design Document**: [Figma Design](https://www.figma.com/design/tNRCrFvlwKl2KJQs44ib5o/MAD?node-id=0-1&t=7reh7I75XQvEqKvO-1)  
 - **Prototype APK**: Coming soon!  
