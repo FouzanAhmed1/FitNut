@@ -15,7 +15,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -138,7 +137,7 @@ class MainActivity : ComponentActivity() {
         steps: Int,
         caloriesBurned: Float
     ) {
-        NavHost(navController = navController, startDestination = "home", modifier = modifier) {
+        NavHost(navController = navController, startDestination = "welcome", modifier = modifier) {
             composable("home") { HomeScreen(navController = navController, modifier = modifier) }
             composable("nutrition") {
                 NutritionScreen(
@@ -146,9 +145,6 @@ class MainActivity : ComponentActivity() {
                     modifier = modifier
                 )
             }
-            composable("welcome") { WelcomeActivity(navController) }
-            composable("sign_in") { SignInPage() }
-            composable("sign_up") { SignUpPage() }
             composable("fitness") {
                 FitnessScreen(
                     navController = navController,
@@ -163,17 +159,10 @@ class MainActivity : ComponentActivity() {
                     modifier = modifier
                 )
             }
-
+            composable("welcome") { WelcomeActivity(navController) }
+            composable("sign_in") { SignInPage(navController = navController) }
+            composable("sign_up") { SignUpPage(navController = navController) }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun FitnessScreenPreview() {
-    FitnessScreen(
-        navController = rememberNavController(), // Provide a mock NavController
-        steps = 1000,
-        caloriesBurned = 500.0f
-    )
 }
