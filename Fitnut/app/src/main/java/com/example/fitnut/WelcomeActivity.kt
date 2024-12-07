@@ -1,10 +1,6 @@
 package com.example.fitnut
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -18,32 +14,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
-import com.example.fitnut.R // Make sure the font is referenced correctly
-
-class WelcomeActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                WelcomeScreen()
-            }
-        }
-    }
-}
+import androidx.navigation.NavController
 
 @Composable
-fun WelcomeScreen() {
-    // Reference to the custom Italiana font (make sure italiana.ttf is placed in res/font folder)
-    val italianaFont = FontFamily(Font(R.font.italiana)) // Make sure this font exists in res/font folder
+fun WelcomeActivity(navController: NavController) {
+    val italianaFont = FontFamily(Font(R.font.italiana))
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White), // Set background color to white
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -51,38 +34,32 @@ fun WelcomeScreen() {
             verticalArrangement = Arrangement.Center,
             modifier = Modifier.padding(16.dp)
         ) {
-            // Welcome Text with Italiana font, large size, and centered
             Text(
                 text = "Welcome\n to\n FitNut",
-                fontSize = 96.sp, // Large text size
+                fontSize = 96.sp,
                 fontWeight = FontWeight.Normal,
-                color = Color.Black, // Black text color
+                color = Color.Black,
                 textAlign = TextAlign.Center,
-                fontFamily = italianaFont, // Custom font
-                lineHeight = 110.sp, // Add some line height for spacing between lines
+                fontFamily = italianaFont,
+                lineHeight = 110.sp,
                 modifier = Modifier.padding(bottom = 32.dp)
             )
 
-            // Segmented Buttons (Sign In and Sign Up)
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                // Sign In Button with a black border and tick icon
                 Button(
-                    onClick = { /* Navigate to Sign In */ },
+                    onClick = { navController.navigate("sign_in") },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black, // Black background for Sign In
-                        contentColor = Color.White // White text color
+                        containerColor = Color.Black,
+                        contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(topStart = 16.dp, bottomStart = 16.dp),
-                    modifier = Modifier
-                        .weight(1f)
-                        //.border(2.dp, Color.White, RoundedCornerShape(16.dp)) // Add black border
+                    modifier = Modifier.weight(1f)
                 ) {
-                    // Tick icon and Sign In text
                     Icon(
                         imageVector = Icons.Filled.Check,
                         contentDescription = "Check",
@@ -92,25 +69,21 @@ fun WelcomeScreen() {
                     Text(text = "Sign In", fontSize = 16.sp, fontWeight = FontWeight.Medium)
                 }
 
-                Spacer(modifier = Modifier.width(6.dp)) // Space between buttons
+                Spacer(modifier = Modifier.width(6.dp))
 
-                // Sign Up Button with a white background and black border
                 Button(
-                    onClick = { /* Navigate to Sign Up */ },
+                    onClick = { navController.navigate("sign_up") },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black, // White background for Sign Up
-                        contentColor = Color.White// Black text color
+                        containerColor = Color.Black,
+                        contentColor = Color.White
                     ),
                     shape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-                    modifier = Modifier
-                        .weight(1f)
-                        //.border(2.dp, Color.White, RoundedCornerShape(16.dp)) // Add black border
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(text = "Sign Up", fontSize = 16.sp, fontWeight = FontWeight.Medium)
                 }
             }
 
-            // Right arrow below the segmented buttons
             Icon(
                 imageVector = Icons.Filled.ArrowForward,
                 contentDescription = "Arrow Forward",
