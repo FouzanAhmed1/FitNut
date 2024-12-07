@@ -159,6 +159,9 @@ class MainActivity : ComponentActivity() {
                     modifier = modifier
                 )
             }
+            composable("welcome") { WelcomeActivity(navController) }
+            composable("sign_in") { SignInPage() }
+            composable("sign_up") { SignUpPage() }
         }
     }
 }
