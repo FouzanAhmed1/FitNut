@@ -211,12 +211,13 @@ class MainActivity : ComponentActivity() {
             composable("sign_up") { SignUpPage(navController = navController) }
             composable("meal") {
                 val meals = listOf(
-                    Meal("Chicken Salad", 250,"bowl",4872.00),
+                    Meal("Chicken Salad", 250, "bowl", 4872.00),
                     Meal("Grilled Fish", 200, "dish", 6739.04),
-                    Meal("Fruit Bowl", 150,"bowl",482.00)
+                    Meal("Fruit Bowl", 150, "bowl", 482.00)
                 )
-                MealScreen(meals = meals, isLoading = false)
+                MealScreen(navController = navController, meals = meals, isLoading = false)
             }
+
 
 
         }
