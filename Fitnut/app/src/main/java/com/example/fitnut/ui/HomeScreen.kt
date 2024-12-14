@@ -114,7 +114,7 @@ fun HomeScreen(
                 )
             }
             // Help Icon Button
-            IconButton(onClick = { navController.navigate("progress") }) {
+            IconButton(onClick = { navController.navigate("about") }) {
                 Icon(
                     imageVector = Icons.Filled.Info, // Material Icon for Help
                     contentDescription = "About Us",
