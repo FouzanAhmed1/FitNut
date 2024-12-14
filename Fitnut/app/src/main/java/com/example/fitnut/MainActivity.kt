@@ -1,6 +1,7 @@
 package com.example.fitnut
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -22,17 +23,31 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.fitnut.ui.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
 import com.google.android.gms.fitness.data.Field
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.gms.common.api.ApiException
+
 
 class MainActivity : ComponentActivity() {
 
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initialize Google Sign-In client
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("YOUR_CLIENT_ID")  // Replace with your OAuth Client ID
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // Initialize the permission request launcher
         requestPermissionLauncher = registerForActivityResult(
@@ -114,11 +129,36 @@ class MainActivity : ComponentActivity() {
             }
     }
 
+    // Handle Google Sign-In result
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 1000) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+                val auth = FirebaseAuth.getInstance()
+                auth.signInWithCredential(credential)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            val user = auth.currentUser
+                            Log.d("GoogleSignIn", "Sign-in successful: ${user?.displayName}")
+                            // You can navigate to the home screen here
+                        } else {
+                            Log.e("GoogleSignIn", "Sign-in failed", task.exception)
+                        }
+                    }
+            } catch (e: ApiException) {
+                Log.e("GoogleSignIn", "Sign-in failed", e)
+            }
+        }
+    }
+
     @Composable
     fun FitNutAppUI(steps: Int, caloriesBurned: Float) {
         val navController = rememberNavController()
         Scaffold(
-            topBar = { TopAppBar(title = { Text("FitNut") }) },
             content = { innerPadding ->
                 Navigation(
                     navController = navController,
@@ -164,5 +204,4 @@ class MainActivity : ComponentActivity() {
             composable("sign_up") { SignUpPage(navController = navController) }
         }
     }
-
 }

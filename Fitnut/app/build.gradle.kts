@@ -82,4 +82,6 @@ dependencies {
     implementation ("androidx.navigation:navigation-compose:2.6.0")
     implementation ("com.google.android.gms:play-services-fitness:21.1.0") // Google Fit API
     implementation ("com.google.android.gms:play-services-auth:20.5.0")
+    implementation ("com.google.android.gms:play-services-auth:20.3.0")  // Google Sign-In
+
 }
