@@ -88,7 +88,8 @@ fun HomeScreen(
                     )
                     .clickable {
                         // Use an Intent to launch MealActivity
-                        navController.navigate("fitness")
+                        val intent = Intent(context, MealActivity::class.java)
+                        context.startActivity(intent)
                     },
                 contentAlignment = Alignment.Center
             ) {
