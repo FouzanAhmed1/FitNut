@@ -33,7 +33,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.common.api.ApiException
 import androidx.compose.ui.platform.LocalContext
+import com.example.fitnut.models.Meal
 
+//import kotlin.coroutines.jvm.internal.CompletedContinuation.context
 
 
 class MainActivity : ComponentActivity() {
@@ -204,15 +206,19 @@ class MainActivity : ComponentActivity() {
             }
             composable("welcome") { WelcomeActivity(navController) }
             composable("sign_in") { SignInPage(navController = navController) }
+            composable("profile") { ProfileScreen(navController = navController) }
+            composable("about") { AboutContactScreen(navController = navController) }
             composable("sign_up") { SignUpPage(navController = navController) }
             composable("meal") {
-                val context = LocalContext.current
-                val intent = Intent(context, MealActivity::class.java).apply {
-                    putExtra("steps", steps)
-                    putExtra("caloriesBurned", caloriesBurned)
-                }
-                context.startActivity(intent)
+                val meals = listOf(
+                    Meal("Chicken Salad", 250,"bowl",4872.00),
+                    Meal("Grilled Fish", 200, "dish", 6739.04),
+                    Meal("Fruit Bowl", 150,"bowl",482.00)
+                )
+                MealScreen(meals = meals, isLoading = false)
             }
+
+
         }
     }
 }

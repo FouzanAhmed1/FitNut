@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.example.fitnut.adapters.MealAdapter
@@ -25,13 +26,22 @@ class MealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meal)
 
+        // Initialize UI components
         recyclerView = findViewById(R.id.recyclerView)
         loaderAnimationView = findViewById(R.id.loaderAnimationView)
+
+        // Set up RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Start loading animation
         loaderAnimationView.visibility = View.VISIBLE
         loaderAnimationView.playAnimation()
 
+        // Fetch meals via API
+        fetchMeals()
+    }
+
+    private fun fetchMeals() {
         // Initialize Retrofit
         val retrofit = Retrofit.Builder()
             .baseUrl("https://trackapi.nutritionix.com/v2/")
@@ -41,19 +51,23 @@ class MealActivity : AppCompatActivity() {
         // Create Nutritionix API service
         val service = retrofit.create(NutritionixService::class.java)
 
-        // Make API call to get meals
+        // Make API call
         val call = service.getMeals("34165b76", "5d6f1ce010a843474cfc3b0e3a8cf0db", "chicken")
-
         call.enqueue(object : Callback<MealResponse> {
             override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
                 loaderAnimationView.visibility = View.GONE
 
                 if (response.isSuccessful) {
                     val meals = response.body()?.hits ?: emptyList()
-                    recyclerView.adapter = MealAdapter(meals)
+                    if (meals.isNotEmpty()) {
+                        // Bind data to RecyclerView adapter
+                        recyclerView.adapter = MealAdapter(meals)
+                    } else {
+                        Toast.makeText(this@MealActivity, "No meals found", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this@MealActivity, "Failed to fetch meals", Toast.LENGTH_SHORT).show()
-                    Log.e("MealActivity", "Error: ${response.code()}")
+                    Toast.makeText(this@MealActivity, "Failed to fetch meals: ${response.code()}", Toast.LENGTH_SHORT).show()
+                    Log.e("MealActivity", "Error: ${response.errorBody()?.string()}")
                 }
             }
 

@@ -87,9 +87,7 @@ fun HomeScreen(
                         shape = RoundedCornerShape(16.dp)
                     )
                     .clickable {
-                        // Use an Intent to launch MealActivity
-                        val intent = Intent(context, MealActivity::class.java)
-                        context.startActivity(intent)
+                        navController.navigate("meal")
                     },
                 contentAlignment = Alignment.Center
             ) {
@@ -121,7 +119,7 @@ fun HomeScreen(
                 )
             }
             // Help Icon Button
-            IconButton(onClick = { navController.navigate("progress") }) {
+            IconButton(onClick = { navController.navigate("about") }) {
                 Icon(
                     imageVector = Icons.Filled.Info, // Material Icon for Help
                     contentDescription = "About Us",

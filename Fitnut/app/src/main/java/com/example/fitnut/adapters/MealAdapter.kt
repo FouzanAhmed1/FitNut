@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.fitnut.R
 import com.example.fitnut.models.Meal
 
-
 class MealAdapter(private val meals: List<Meal>) :
     RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
@@ -19,14 +18,14 @@ class MealAdapter(private val meals: List<Meal>) :
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         val meal = meals[position]
-        holder.foodName.text = meal.food_name
-        holder.calories.text = "Calories: ${meal.calories}"
+        holder.foodName.text = meal.food_name // Binds food_name to the TextView
+        holder.calories.text = "Calories: ${meal.calories}" // Binds calories to the TextView
     }
 
     override fun getItemCount(): Int = meals.size
 
     class MealViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val foodName: TextView = itemView.findViewById(R.id.foodName)
-        val calories: TextView = itemView.findViewById(R.id.calories)
+        val foodName: TextView = itemView.findViewById(R.id.foodName) // Binds foodName TextView
+        val calories: TextView = itemView.findViewById(R.id.calories) // Binds calories TextView
     }
 }
