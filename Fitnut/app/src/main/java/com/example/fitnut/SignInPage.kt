@@ -1,5 +1,7 @@
 package com.example.fitnut
 
+import android.app.Activity
+import android.content.Intent
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -12,13 +14,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import androidx.navigation.compose.rememberNavController
-
+import androidx.compose.ui.platform.LocalContext
+import com.google.android.gms.common.api.ApiException
 
 @Composable
 fun SignInPage(navController: NavController) {
@@ -31,6 +35,17 @@ fun SignInPage(navController: NavController) {
 
     val auth = FirebaseAuth.getInstance()
     val coroutineScope = rememberCoroutineScope()
+
+    // Get the current context for Google Sign-In client initialization
+    val context = LocalContext.current
+    val googleSignInClient = remember {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("249879036699-rqgqq2m2j8slc8uvj400dmtqenqru94q.apps.googleusercontent.com")  // Replace with your OAuth Client ID
+            .requestEmail()
+            .build()
+
+        GoogleSignIn.getClient(context, gso)
+    }
 
     Box(
         modifier = Modifier
@@ -67,11 +82,11 @@ fun SignInPage(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Sign In button
+            // Sign In button for email/password
             Button(
                 onClick = {
                     coroutineScope.launch {
-                        signIn(auth, email.value, password.value, signInMessage, navController)
+                        signInWithEmailPassword(auth, email.value, password.value, signInMessage, navController)
                     }
                 },
                 colors = ButtonDefaults.buttonColors(
@@ -79,7 +94,23 @@ fun SignInPage(navController: NavController) {
                     contentColor = Color.White
                 ),
             ) {
-                Text(text = "Sign In", fontSize = 16.sp, fontWeight = FontWeight.Medium)
+                Text(text = "Sign In with Email", fontSize = 16.sp, fontWeight = FontWeight.Medium)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Google Sign-In button
+            Button(
+                onClick = {
+                    val signInIntent = googleSignInClient.signInIntent
+                    (context as? Activity)?.startActivityForResult(signInIntent, 1000)
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black,
+                    contentColor = Color.White
+                ),
+            ) {
+                Text(text = "Sign In with Google", fontSize = 16.sp, fontWeight = FontWeight.Medium)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -88,7 +119,8 @@ fun SignInPage(navController: NavController) {
     }
 }
 
-suspend fun signIn(
+// Function for Email/Password sign-in
+suspend fun signInWithEmailPassword(
     auth: FirebaseAuth,
     email: String,
     password: String,
@@ -101,11 +133,8 @@ suspend fun signIn(
     }
 
     try {
-        // Sign in with Firebase Authentication
         val result = auth.signInWithEmailAndPassword(email, password).await()
-
         if (result.user != null) {
-            // On successful sign in, navigate to home screen
             navController.navigate("home")
         }
     } catch (e: Exception) {
@@ -113,10 +142,26 @@ suspend fun signIn(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SignInPagePreview() {
-    // Dummy NavController for preview
-    val navController = rememberNavController()
-    SignInPage(navController = navController)
-}
+//// Function to handle Google Sign-In result
+//fun handleGoogleSignInResult(
+//    activity: Activity,
+//    data: Intent?,
+//    auth: FirebaseAuth,
+//    navController: NavController
+//) {
+//    val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//    try {
+//        val account = task.getResult(ApiException::class.java)
+//        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
+//        auth.signInWithCredential(credential)
+//            .addOnCompleteListener(activity) { task ->
+//                if (task.isSuccessful) {
+//                    navController.navigate("home")
+//                } else {
+//                    Toast.makeText(activity, "Authentication Failed.", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//    } catch (e: ApiException) {
+//        Toast.makeText(activity, "Google Sign-In Failed.", Toast.LENGTH_SHORT).show()
+//    }
+//}
