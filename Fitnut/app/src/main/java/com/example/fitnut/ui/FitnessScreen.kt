@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.fitnut.SignInPage
 
 @Composable
@@ -151,4 +152,13 @@ fun FitnessScreen(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun FitnessScreenPreview() {
+    FitnessScreen(
+        navController = rememberNavController(),
+        steps = 1234, // Mock data
+        caloriesBurned = 456.0f // Mock data
+    )
+}
 
