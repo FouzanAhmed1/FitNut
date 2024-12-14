@@ -83,5 +83,13 @@ dependencies {
     implementation ("com.google.android.gms:play-services-fitness:21.1.0") // Google Fit API
     implementation ("com.google.android.gms:play-services-auth:20.5.0")
     implementation ("com.google.android.gms:play-services-auth:20.3.0")  // Google Sign-In
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("com.google.android.material:material:1.9.0")
+    implementation ("com.airbnb.android:lottie:5.0.3")
+
+
 
 }

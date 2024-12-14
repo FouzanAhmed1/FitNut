@@ -1,5 +1,6 @@
-package com.example.fitnut
+package com.example.fitnut.ui
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,25 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.res.painterResource
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.ui.platform.LocalContext
+import com.example.fitnut.MealActivity
+
 
 @Composable
 fun HomeScreen(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current // Get current context for launching intent
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -83,7 +86,11 @@ fun HomeScreen(
                         color = Color.Gray,
                         shape = RoundedCornerShape(16.dp)
                     )
-                    .clickable { navController.navigate("nutrition") },
+                    .clickable {
+                        // Use an Intent to launch MealActivity
+                        val intent = Intent(context, MealActivity::class.java)
+                        context.startActivity(intent)
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Text(

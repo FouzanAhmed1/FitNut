@@ -32,6 +32,8 @@ import com.google.android.gms.fitness.data.Field
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.common.api.ApiException
+import androidx.compose.ui.platform.LocalContext
+
 
 
 class MainActivity : ComponentActivity() {
@@ -202,6 +204,14 @@ class MainActivity : ComponentActivity() {
             composable("welcome") { WelcomeActivity(navController) }
             composable("sign_in") { SignInPage(navController = navController) }
             composable("sign_up") { SignUpPage(navController = navController) }
+            composable("meal") {
+                val context = LocalContext.current
+                val intent = Intent(context, MealActivity::class.java).apply {
+                    putExtra("steps", steps)
+                    putExtra("caloriesBurned", caloriesBurned)
+                }
+                context.startActivity(intent)
+            }
         }
     }
 }
