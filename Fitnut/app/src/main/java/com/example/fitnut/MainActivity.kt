@@ -172,6 +172,7 @@ class MainActivity : ComponentActivity() {
         )
     }
 
+
     @Composable
     fun Navigation(
         navController: NavHostController,
