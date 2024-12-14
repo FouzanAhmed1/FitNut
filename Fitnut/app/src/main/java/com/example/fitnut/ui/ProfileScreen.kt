@@ -137,7 +137,7 @@ fun ProfileScreen(
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Black)
         ) {
-            Text(text = "Edit Profile", color = Color.White, fontSize = 16.sp)
+            Text(text = "Save Profile", color = Color.White, fontSize = 16.sp)
         }
     }
 }

@@ -202,6 +202,7 @@ class MainActivity : ComponentActivity() {
             composable("welcome") { WelcomeActivity(navController) }
             composable("sign_in") { SignInPage(navController = navController) }
             composable("sign_up") { SignUpPage(navController = navController) }
+            composable("profile") { ProfileScreen(navController = navController) }
         }
     }
 }
