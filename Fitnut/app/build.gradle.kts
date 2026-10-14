@@ -4,6 +4,13 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+// API credentials are read from gradle.properties (project-local or
+// ~/.gradle/gradle.properties) and injected into BuildConfig. See
+// gradle.properties.example for the expected keys.
+val nutritionixAppId: String = (findProperty("NUTRITIONIX_APP_ID") as String?) ?: ""
+val nutritionixAppKey: String = (findProperty("NUTRITIONIX_APP_KEY") as String?) ?: ""
+val googleOAuthClientId: String = (findProperty("GOOGLE_OAUTH_CLIENT_ID") as String?) ?: ""
+
 android {
     namespace = "com.example.fitnut"
     compileSdk = 35
@@ -14,6 +21,10 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "NUTRITIONIX_APP_ID", "\"$nutritionixAppId\"")
+        buildConfigField("String", "NUTRITIONIX_APP_KEY", "\"$nutritionixAppKey\"")
+        buildConfigField("String", "GOOGLE_OAUTH_CLIENT_ID", "\"$googleOAuthClientId\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -39,6 +50,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -81,11 +93,8 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("androidx.navigation:navigation-compose:2.6.0")
     implementation ("com.google.android.gms:play-services-fitness:21.1.0") // Google Fit API
-    implementation ("com.google.android.gms:play-services-auth:20.5.0")
-    implementation ("com.google.android.gms:play-services-auth:20.3.0")  // Google Sign-In
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("com.google.android.gms:play-services-auth:20.5.0")  // Google Sign-In
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation ("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("com.airbnb.android:lottie:5.0.3")

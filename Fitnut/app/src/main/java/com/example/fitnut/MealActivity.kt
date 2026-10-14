@@ -51,8 +51,8 @@ class MealActivity : AppCompatActivity() {
         // Create Nutritionix API service
         val service = retrofit.create(NutritionixService::class.java)
 
-        // Make API call
-        val call = service.getMeals("34165b76", "5d6f1ce010a843474cfc3b0e3a8cf0db", "chicken")
+        // API credentials come from BuildConfig (set via gradle.properties, see README)
+        val call = service.getMeals(BuildConfig.NUTRITIONIX_APP_ID, BuildConfig.NUTRITIONIX_APP_KEY, "chicken")
         call.enqueue(object : Callback<MealResponse> {
             override fun onResponse(call: Call<MealResponse>, response: Response<MealResponse>) {
                 loaderAnimationView.visibility = View.GONE

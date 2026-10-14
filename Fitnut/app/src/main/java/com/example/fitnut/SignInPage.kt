@@ -1,8 +1,6 @@
 package com.example.fitnut
 
 import android.app.Activity
-import android.content.Intent
-import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,13 +14,11 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import androidx.compose.ui.platform.LocalContext
-import com.google.android.gms.common.api.ApiException
 
 @Composable
 fun SignInPage(navController: NavController) {
@@ -40,7 +36,7 @@ fun SignInPage(navController: NavController) {
     val context = LocalContext.current
     val googleSignInClient = remember {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("249879036699-rqgqq2m2j8slc8uvj400dmtqenqru94q.apps.googleusercontent.com")  // Replace with your OAuth Client ID
+            .requestIdToken(BuildConfig.GOOGLE_OAUTH_CLIENT_ID)  // Set via gradle.properties, see README
             .requestEmail()
             .build()
 
@@ -141,27 +137,3 @@ suspend fun signInWithEmailPassword(
         signInMessage.value = "Error: ${e.message}"
     }
 }
-
-//// Function to handle Google Sign-In result
-//fun handleGoogleSignInResult(
-//    activity: Activity,
-//    data: Intent?,
-//    auth: FirebaseAuth,
-//    navController: NavController
-//) {
-//    val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//    try {
-//        val account = task.getResult(ApiException::class.java)
-//        val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-//        auth.signInWithCredential(credential)
-//            .addOnCompleteListener(activity) { task ->
-//                if (task.isSuccessful) {
-//                    navController.navigate("home")
-//                } else {
-//                    Toast.makeText(activity, "Authentication Failed.", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//    } catch (e: ApiException) {
-//        Toast.makeText(activity, "Google Sign-In Failed.", Toast.LENGTH_SHORT).show()
-//    }
-//}

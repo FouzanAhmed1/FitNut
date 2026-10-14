@@ -1,0 +1,11 @@
+# Copy these keys into your project-local gradle.properties (gitignored) or
+# ~/.gradle/gradle.properties and fill in real values. They are injected into
+# BuildConfig at build time; never commit real values to the repository.
+
+# Nutritionix API credentials: https://www.nutritionix.com/business/api
+NUTRITIONIX_APP_ID=
+NUTRITIONIX_APP_KEY=
+
+# Google OAuth 2.0 client ID for Android sign-in (from Google Cloud Console).
+# Also used by the google-services.json Firebase setup.
+GOOGLE_OAUTH_CLIENT_ID=

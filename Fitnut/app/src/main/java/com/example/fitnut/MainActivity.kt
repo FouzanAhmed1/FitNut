@@ -35,8 +35,6 @@ import com.google.android.gms.common.api.ApiException
 import androidx.compose.ui.platform.LocalContext
 import com.example.fitnut.models.Meal
 
-//import kotlin.coroutines.jvm.internal.CompletedContinuation.context
-
 
 class MainActivity : ComponentActivity() {
 
@@ -48,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
         // Initialize Google Sign-In client
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken("YOUR_CLIENT_ID")  // Replace with your OAuth Client ID
+            .requestIdToken(BuildConfig.GOOGLE_OAUTH_CLIENT_ID)  // Set via gradle.properties, see README
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
