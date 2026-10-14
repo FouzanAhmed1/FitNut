@@ -35,7 +35,7 @@ fun WelcomeActivity(navController: NavController) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Welcome\n to\n FitNut",
+                text = "Welcome to\nFitNut",
                 fontSize = 96.sp,
                 fontWeight = FontWeight.Normal,
                 color = Color.Black,

@@ -96,7 +96,7 @@ fun ProfileScreen(
             Spacer(modifier = Modifier.height(8.dp))
             ProfileTextField(label = "Weight (kg)", value = weight, onValueChange = { weight = it }, keyboardType = KeyboardType.Number)
             Spacer(modifier = Modifier.height(8.dp))
-            ProfileTextField(label = "Height (inch)", value = height, onValueChange = { height = it }, keyboardType = KeyboardType.Number)
+            ProfileTextField(label = "Height (inches)", value = height, onValueChange = { height = it }, keyboardType = KeyboardType.Number)
             Spacer(modifier = Modifier.height(8.dp))
             ProfileTextField(label = "Water Intake Goal (liters)", value = waterIntakeGoal, onValueChange = { waterIntakeGoal = it }, keyboardType = KeyboardType.Number)
             Spacer(modifier = Modifier.height(8.dp))
